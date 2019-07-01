@@ -10,10 +10,10 @@ export default class Result extends React.Component<IProps,{}> {
   
   public render() {
     return (
-      <div className="dank">
+      <div className="spinText">
         {
           this.props.result === "" && this.props.filelength > 0 ?
-            <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /> :
+            <Loader type="TailSpin" color="#00BFFF" /> :
             <p>{this.props.result}</p>
         }
       </div>

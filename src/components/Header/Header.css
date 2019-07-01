@@ -5,15 +5,20 @@
     padding-top: 30px;
 }
 
-.image {
+/* .image {
     padding-left: 15px;
     max-height: 100%;
     max-width: 100%;
-}
+} */
 
-.headerText{
+.headerText {
     font-size: 80px;
     margin: auto 0;
     font-weight: bold;
-    color: #EEEEEE;
+    color: rgb(20, 20, 50);
+}
+
+.header img {
+    width: 15%;
+    display: block;
 }

@@ -7,11 +7,11 @@ interface IState {
     dropzone: any
 }
 
-interface ppp {
+interface IProps {
     setResults: any
 }
 
-export default class DropArea extends React.Component<ppp, IState> {
+export default class DropArea extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -52,13 +52,30 @@ export default class DropArea extends React.Component<ppp, IState> {
         })
             .then((response: any) => {
                 if (!response.ok) {
-                    this.props.setResults("Sorry there was an error", this.state.imageFiles.length);
+                    this.props.setResults("Sorry there was an error!", this.state.imageFiles.length);
                 } else {
                     response.json().then((json: any[]) => {
-                        if(json.length<1){
-                            this.props.setResults("Sorry no face detected", this.state.imageFiles.length);
-                        }else{
-                            this.props.setResults("Age is " + json[0].faceAttributes.age, this.state.imageFiles.length);
+                        if (json.length < 1) {
+                            this.props.setResults("Show your face hmm...", this.state.imageFiles.length);
+                        } else {
+                            const age = json[0].faceAttributes.age;
+                            let text = "Baby^^ This is 18+. Leave right away!";
+                            if (age > 70)
+                                text = "Geez... You are old.";
+                            else if (age > 50)
+                                text = "Do somethin";
+                            else if (age > 30)
+                                text = "Do somethin in your life. Age don't matter.";
+                            else if (age > 20)
+                                text = "Yay! Party time. Booze please.";
+                            else if (age > 10)
+                                text = "Oh no, you're almost 18. Almost there. Hang in there";
+                            else if (age > 5)
+                                text = "You are just starting your life. Come back later.";
+                            
+                            this.props.setResults("My intelligence says you are " + age + " years old. " + text, this.state.imageFiles.length);
+                            
+                            // this.props.setResults("Age is " + json[0].faceAttributes.age, this.state.imageFiles.length);
                         }
                     })
                 }
@@ -70,11 +87,11 @@ export default class DropArea extends React.Component<ppp, IState> {
             <div className="cont">
                 <div className="centreText">
                     <div className="dropZone">
-                        <ReactDropZone accept='image/*' onDrop={this.state.dropzone} style={{ position: "relative" }}>
+                        <ReactDropZone accept='image/*' onDrop={this.state.dropzone} className="dropHere">
                             <div className="dropZoneText">
                                 {
                                     this.state.imageFiles.length > 0 ?
-                                        <div>{this.state.imageFiles.map((file) => <img className="image1" key={file.name} src={file.preview} alt="someImage" />)}</div> :
+                                        <div>{this.state.imageFiles.map((file) => <img className="image" key={file.name} src={file.preview} alt="someImage" />)}</div> :
                                         <p>Try dropping some files here, or click to select files to upload.</p>
                                 }
                             </div>

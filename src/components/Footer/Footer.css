@@ -1,0 +1,7 @@
+.footer {
+    position: absolute;
+    color: rgb(20, 20, 50);
+    /* margin-top: 40px; */
+    margin-left: 5%;
+    font-size: 0.9rem;
+}
